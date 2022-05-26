@@ -44,7 +44,9 @@ class _ScreenLoginState extends State<ScreenLogin> {
               padding: const EdgeInsets.all(10),
               child: TextField(
                 decoration: const InputDecoration(
+                  icon: Icon(Icons.face),
                   border: OutlineInputBorder(),
+                  
                   labelText: 'User Name',
                 ),
               ),
