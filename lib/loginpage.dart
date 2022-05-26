@@ -17,7 +17,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
    return Scaffold(
      appBar: AppBar(
        title: Text('Welcome'),
-       centerTitle: true,
+       centerTitle: true,      
        flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(colors: [Colors.green,Colors.yellow],
