@@ -96,9 +96,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
         )
  
        ],
-     )
-                           
-           
+     )                                     
        
       );     
    
