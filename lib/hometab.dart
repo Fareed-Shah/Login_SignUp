@@ -16,7 +16,7 @@ class _HomeTabState extends State<HomeTab> {
     return Scaffold(
       body: 
            Text_Widget(
-             name: 'Home'
+             name: 'Home Tab'
            ),
     );
   }
