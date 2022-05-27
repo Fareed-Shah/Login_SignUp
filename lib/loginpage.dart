@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:login/custom_widgets.dart';
 import 'package:login/home.dart';
@@ -12,11 +13,42 @@ class ScreenLogin extends StatefulWidget {
 }
 
 class _ScreenLoginState extends State<ScreenLogin> {
+
+GlobalKey<FormState> formkey = GlobalKey<FormState>();
+
+void validate(){
+  if(formkey.currentState!.validate()){
+    print('Ok');
+  }
+  else{
+    print('Error');
+  }
+}
+
+String? emailvalidate(email){
+  if(email!.isEmpty && !EmailValidator.validate(email)){
+    return "Enter a Valid Email";
+  }
+  else{
+    return null;
+  }
+}
+
+String? passwordvalidate(pass){
+   if(pass!.isEmpty){
+     return "Enter Password";
+   }
+   else{
+     return null;
+   }
+}
+
+
   @override
   Widget build(BuildContext context) {
    return Scaffold(
      appBar: AppBar(
-       title: Text('Welcome'),
+       title: Text('Welcomed !'),
        centerTitle: true,      
        flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -28,77 +60,81 @@ class _ScreenLoginState extends State<ScreenLogin> {
         ),
      ),
      body:     
-     Column(
+     Form(
+       key: formkey,
+       autovalidateMode: AutovalidateMode.onUserInteraction,
+       child:      
+       ListView(         
        children: [
-         Container(
-           alignment: Alignment.center,
-           padding: EdgeInsets.all(10),
-           child: Text_Widget(name: 'FareedShah',font_size: 30,fontcolor: Colors.green,font_Weight: FontWeight.w500),
-         ),
-          Container(            
-           alignment: Alignment.center,
-           padding: EdgeInsets.all(10),
-           child: Text_Widget(name: 'Sign In',font_size: 20),
-         ),
-             Container(
-              padding: const EdgeInsets.all(10),
-              child: TextField(
-                decoration: const InputDecoration(
-                  icon: Icon(Icons.face),
-                  border: OutlineInputBorder(),
-                  
-                  labelText: 'User Name',
-                ),
-              ),
-            ),
           Container(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-              child: TextField(
-                obscureText: true,                
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Password',
-                ),
-              ),
-            ),
-            TextButton(child: Text('Sign up'),
-            onPressed: null,),
-            
-            ElevatedButton(
-          child: const Text('Login'),
-          onPressed: () {                     
-          //Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
-          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => HomeScreen() ));
-          },
-          style: ElevatedButton.styleFrom(
-             shape: RoundedRectangleBorder(
-               borderRadius: BorderRadius.circular(50),
-             ),
-              primary: Colors.green,
-              padding: const EdgeInsets.symmetric(horizontal: 150, vertical: 20),
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,                
-          children: [
-            
-            
-            Text('Does not have account?'),
-       TextButton(
-                  child: const Text(
-                    'Sign up',
-                    style: TextStyle(fontSize: 20),
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(10),
+                child: const Text(
+                  'Fareed shah',
+                  style: TextStyle(
+                      color: Colors.green,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 30),
+                )),
+                Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(10),
+                child: const Text(
+                  'Sign in',
+                  style: TextStyle(
+                      
+                      fontWeight: FontWeight.w500,
+                      fontSize: 20),
+                )),
+                Container(
+                 alignment: Alignment.center,
+                  padding: const EdgeInsets.all(10),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'User Name',
+                      prefixIcon: Icon(Icons.mail)
+                    ),
+                    //validation function define above
+                    validator: emailvalidate                    
                   ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  child: TextFormField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Password',
+                      prefixIcon: Icon(Icons.lock)
+                    ),
+                    validator: passwordvalidate,
+                  ),
+                ),
+                Container(
+                height: 50,
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: ElevatedButton(
+                  child: const Text('Login'),
                   onPressed: () {
-                    //signup screen
-                  },
+                    final validform =formkey.currentState!.validate();
+
+                    if(validform){
+                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
+                    }
+
+
+                  }                  
+                  
+                 ,
                 )
-          ],
-        )
- 
+            ),
+                
        ],
-     )                                     
+
+     ),
+     )
+                                          
        
       );     
    
