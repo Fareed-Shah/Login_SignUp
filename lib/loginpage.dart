@@ -90,7 +90,7 @@ String? passwordvalidate(pass){
                  alignment: Alignment.center,
                   padding: const EdgeInsets.all(10),
                   child: TextFormField(
-                    decoration: InputDecoration(
+                    decoration: InputDecoration  (
                       border: OutlineInputBorder(),
                       labelText: 'User Name',
                       prefixIcon: Icon(Icons.mail)
